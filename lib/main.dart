@@ -328,7 +328,7 @@ class _AsymmetricProductCardState extends State<AsymmetricProductCard> {
       clipper: AsymmetricRectangleClipper(),
       child: BackdropFilter(
         enabled: true,
-        filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 4.0),
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(
           //width: 200,
           height: widget.height,
@@ -336,9 +336,18 @@ class _AsymmetricProductCardState extends State<AsymmetricProductCard> {
           decoration: BoxDecoration(
               color: const Color(0xFF4B6EAF),
               borderRadius: BorderRadius.circular(0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withAlpha(64), // 25% opacity
+                  offset: Offset(4, 4), // x = 4, y = 4
+                  blurRadius: 4, // Assumed blur radius
+                ),
+              ],
               gradient: LinearGradient(colors: [
-                Color(0xEF363E51),
-                Color(0xEF191E26),
+                Color(0xD0363E51),
+                Color(0xD0191E26),
+                /* Color(0x99363E51),
+                Color(0x99191E26),*/
               ])),
           child: CustomPaint(
             painter: ClipperBorderPainter(),
