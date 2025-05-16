@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    Widget app = MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Asymmetric Product Card',
       theme: ThemeData(
@@ -27,6 +28,31 @@ class MyApp extends StatelessWidget {
       ),
       home: ProductCardDemo(),
     );
+
+    if (kIsWeb) {
+      // Restrict size to typical mobile dimensions on web
+      app = Center(
+        child: Container(
+          width: 390,  // iPhone 12 width
+          height: 750, //844, // iPhone 12 height
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black26),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withAlpha(25),
+                blurRadius: 12,
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: app,
+          ),
+        ),
+      );
+    }
+    return app;
   }
 }
 
